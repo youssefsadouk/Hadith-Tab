@@ -2,11 +2,12 @@
     "name": "Hadith Tab",
     "version": "1.0.1",
     "manifest_version" : 2,
-    "description": "A Chrome Extension that shows Prophet Muhamed's Hadith",
+    "description": "A Chrome Extension that shows Prophet Muhamed's Hadith once a tab is opened",
     "browser_action": {
         "default_popup": "popup.html"
     },
-    "permissions": ["activeTab",
-        "https://www.hadithapi.com/*"
-    ]
+    "chrome_url_overrides": {
+        "newtab": "popup.html"
+    },
+    "permissions": ["activeTab"]
 }

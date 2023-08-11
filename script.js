@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        hadiths = data.hadiths.data; // Assuming data.data contains the array of hadiths
+        hadiths = data.hadiths.data; 
         displayHadith(currentHadithIndex); // Display the initial hadith
       })
       .catch(error => {
@@ -30,6 +30,30 @@ document.addEventListener("DOMContentLoaded", function () {
       currentHadithIndex = (currentHadithIndex + 1) % hadiths.length;
       displayHadith(currentHadithIndex);
     });
+
+    const API_KEY = "6BcD1tfLZitGOlG64XXDD2bbddwBV4bmPSh6DbxHdD4";
+    const API_URL = `https://api.unsplash.com/photos/random/?query=nature&client_id=${API_KEY}`;
+
+    async function fetchBackgroundImage() {
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            return data.urls.regular;
+        } catch (error) {
+            console.error("Error fetching background image:", error);
+            return null;
+        }
+    }
+
+    async function setRandomBackground() {
+        const imageUrl = await fetchBackgroundImage();
+        if (imageUrl) {
+            document.documentElement.style.backgroundImage = `url('${imageUrl}')`;
+        }
+    }
+
+    setRandomBackground();
+
     
 });
     
