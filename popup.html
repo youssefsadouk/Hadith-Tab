@@ -12,15 +12,35 @@
 </head>
   
 <body>
-    <div class="container">
-<!--         <h1><u> Hadith Tab </u></h1> -->
-        <section class="clock-section">
-            <my-clock></my-clock>
-        </section>
-        <div class="hadith-box">
-            <p id="hadith"></p>
-        </div>
-    </div>
+    <div class="wrapper">
+        <div class="prayer-times">
+            <!-- <h2>Prayer Times</h2> -->
+            <ul>
+                <li><strong>Sunrise:</strong> <span id="sunriseTime"></span></li>
+                <li><strong>Fajr:</strong> <span id="fajrTime"></span></li>
+                <li><strong>Dhuhr:</strong> <span id="dhuhrTime"></span></li>
+                <li><strong>Asr:</strong> <span id="asrTime"></span></li>
+                <li><strong>Maghrib:</strong> <span id="maghribTime"></span></li>
+                <li><strong>Isha:</strong> <span id="ishaTime"></span></li>
+            </ul>
+        </div>
+        <div class="container">
+            <section class="clock-section">
+                <my-clock></my-clock>
+            </section>
+            <div class="hadith-box">
+                <p id="hadith"></p>
+            </div>
+            <div class="navigation">
+                <button id="prevPageButton">Previous Page</button>
+                <button id="prevButton">Previous Hadith</button>
+                <div id="hadith_num_cont">  الحديث رقم  <span id="hadith_num"> </span> الصفحة <span id="page_num">1</span></div>
+                <button id="nextButton">Next Hadith</button>
+                <button id="nextPageButton">Next Page</button>
+            </div>
+            <button id="toggleHadithButton">Toggle Hadith Language - غير لغة الحديث</button>
+        </div>
+    </div>
     <script src="script.js"></script>
     <script src="./src/clock/main.js"></script>
 </body>

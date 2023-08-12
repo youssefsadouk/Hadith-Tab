@@ -1,6 +1,7 @@
 html {
   background-size: cover;
   background-blend-mode: multiply;
+  position: fixed;
 }
 body {
   font-family: Catamaran;
@@ -40,19 +41,58 @@ h1 {
 
 /* Styling for the hadith box */
 .hadith-box {
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: background-color 0.3s;
-  /* overflow: hidden; */
+  max-height: 200px; 
+  overflow-y: scroll;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #3498db #f5f5f5; /* For Firefox */
+  /* Hide default scrollbar for other browsers */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+/* Style the thumb and track for WebKit browsers (Chrome, Edge) */
+.hadith-box::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.hadith-box::-webkit-scrollbar-thumb {
+  background-color: #3498db;
+  border-radius: 5px;
+}
+
+.hadith-box::-webkit-scrollbar-thumb:hover {
+  background-color: #2980b9;
+}
+
+.hadith-box::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+.navigation button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+/* Style for navigation buttons on hover */
+.navigation button:hover {
+  background-color: #2980b9;
 }
 
 /* Styling for the hadith text */
 #hadith {
-  color: #fff;
+  color: #333;
   font-size: 2.3em;
   line-height: 1.5;
   
@@ -66,4 +106,56 @@ h1 {
 /* Add a bit of margin to the bottom of the popup */
 .container {
   margin-bottom: 20px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.prayer-times {
+    background-color: #f2f0eb;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px; /* Add some spacing between prayer times and main content */
+    display: inline-block; /* Set to inline-block */
+    width: auto; /* Set width to auto */
+    height:fit-content;
+}
+
+.prayer-times h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.prayer-times ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.prayer-times li {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.prayer-times li strong {
+  color: #3498db;
+}
+
+#toggleHadithButton{
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+#hadith_num_cont{
+  display: inline-block;
+  color: #fff;
+  font-size:  19px;
 }
