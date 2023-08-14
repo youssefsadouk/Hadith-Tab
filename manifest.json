@@ -6,6 +6,9 @@
     "browser_action": {
         "default_popup": "popup.html"
     },
+    "icons": {
+        "128": "icons/quran.png"
+    },
     "chrome_url_overrides": {
         "newtab": "popup.html"
     },

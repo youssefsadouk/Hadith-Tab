@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let prevPageButton = document.querySelector("#prevPageButton");
     let nextPageButton = document.querySelector("#nextPageButton");
     let toggleHadithButton = document.querySelector("#toggleHadithButton");
+  
+
     let hadiths = []; // An array to store the fetched hadiths
     let currentHadithIndex = 0; // Index of the currently displayed hadith
     let currentPage = 1; // Current page number
     let apiUrl = `https://www.hadithapi.com/public/api/hadiths?apiKey=$2y$10$3ltemfRCbiFE3iHjY5R8AtHAFYbMhsWZbvCIV1fLmtIUSJOVH8bO&page=${currentPage}`;
     // Fetch hadiths and store them in the hadiths array
-    
-    
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
@@ -112,11 +112,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setRandomBackground();
 
-    // getting prayer times
-    
 
-    async function fetchPrayerTimes(latitude, longitude) {
-        const apiUrl = `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=2&school=1&midnightMode=1`;
+      // Fetch user's approximate location based on IP address
+      async function fetchUserLocation() {
+        try {
+            const response = await fetch("https://ipinfo.io/json");
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error fetching user location:", error);
+            return null;
+        }
+      }
+
+      // Fetch prayer times using user's approximate location
+      async function fetchPrayerTimesByLocation(location) {
+        const { city, region, country, loc } = location;
+        const [latitude, longitude] = loc.split(",");
+        const apiUrl = `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=2&school=1&city=${city}&region=${region}&country=${country}`;
+        
         try {
             const response = await fetch(apiUrl);
             const data = await response.json();
@@ -125,32 +139,28 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error fetching prayer times:", error);
             return null;
         }
-    }
+      }
 
-    async function displayPrayerTimes() {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(async (position) => {
-                const { latitude, longitude } = position.coords;
-                const prayerTimes = await fetchPrayerTimes(latitude, longitude);
-                if (prayerTimes) {
-                    console.log("Prayer Times:", prayerTimes);
-                    // Update the div with the prayer times data
-                    document.getElementById("sunriseTime").textContent = prayerTimes.Sunrise;
-                    document.getElementById("fajrTime").textContent = prayerTimes.Fajr;
-                    document.getElementById("dhuhrTime").textContent = prayerTimes.Dhuhr;
-                    document.getElementById("asrTime").textContent = prayerTimes.Asr;
-                    document.getElementById("maghribTime").textContent = prayerTimes.Maghrib;
-                    document.getElementById("ishaTime").textContent = prayerTimes.Isha;
-                }
-            }, (error) => {
-                console.error("Error getting geolocation:", error);
-            });
-        } else {
-            console.error("Geolocation is not supported in this browser.");
+      // Display prayer times using the user's approximate location
+      async function displayPrayerTimesByLocation() {
+        const userLocation = await fetchUserLocation();
+        if (userLocation) {
+            const prayerTimes = await fetchPrayerTimesByLocation(userLocation);
+            if (prayerTimes) {
+              document.getElementById("sunriseTime").textContent = prayerTimes.Sunrise;
+              document.getElementById("fajrTime").textContent = prayerTimes.Fajr;
+              document.getElementById("dhuhrTime").textContent = prayerTimes.Dhuhr;
+              document.getElementById("asrTime").textContent = prayerTimes.Asr;
+              document.getElementById("maghribTime").textContent = prayerTimes.Maghrib;
+              document.getElementById("ishaTime").textContent = prayerTimes.Isha;
+            }
         }
-    }
+      }
 
-    displayPrayerTimes();
+      // Call the function to display prayer times based on user's approximate location
+      displayPrayerTimesByLocation();
+  
+    
 
     // Toggle hadith language when the button is clicked
     toggleHadithButton.addEventListener("click", () => {
@@ -160,8 +170,6 @@ document.addEventListener("DOMContentLoaded", function () {
           hadithDisplay.innerHTML = hadiths[currentHadithIndex].hadithArabic;
       }
     });
-
-     
 
 });
     
