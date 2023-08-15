@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let prevPageButton = document.querySelector("#prevPageButton");
     let nextPageButton = document.querySelector("#nextPageButton");
     let toggleHadithButton = document.querySelector("#toggleHadithButton");
-  
+    
 
     let hadiths = []; // An array to store the fetched hadiths
     let currentHadithIndex = 0; // Index of the currently displayed hadith
@@ -96,6 +96,29 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await fetch(API_URL);
             const data = await response.json();
+            const photographerName = data.user.name;
+
+            // Get the photographer's Unsplash username from the API response
+            const unsplashUsername = data.user.username;
+            // Create anchor elements for the photographer's name and Unsplash link
+            const attributionElement = document.getElementById("attribution");
+            const photographerLink = document.createElement("a");
+            const unsplashLink = document.createElement("a");
+
+            // Set the URLs for the links
+            photographerLink.href = data.user.links.html;
+            unsplashLink.href = `https://unsplash.com`;
+
+            // Set the link texts
+            photographerLink.textContent = photographerName;
+            unsplashLink.textContent = "Unsplash";
+
+            // Clear the previous content and append the links
+            attributionElement.innerHTML = "";
+            attributionElement.appendChild(document.createTextNode("Photo by "));
+            attributionElement.appendChild(photographerLink);
+            attributionElement.appendChild(document.createTextNode(" on "));
+            attributionElement.appendChild(unsplashLink);
             return data.urls.regular;
         } catch (error) {
             console.error("Error fetching background image:", error);

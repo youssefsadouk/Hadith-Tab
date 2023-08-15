@@ -98,19 +98,19 @@ h1 {
   
 }
 
-/* Hover effect on the hadith box */
 .hadith-box:hover {
   background-color: #f5f5f5;
 }
-
-/* Add a bit of margin to the bottom of the popup */
 .container {
   margin-bottom: 20px;
 }
-.wrapper {
+#wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: row; 
 }
+
+
+
 .prayer-times {
     background-color: #f2f0eb;
     border-radius: 10px;
@@ -182,4 +182,24 @@ h1 {
   border-radius: 50%;
   margin-top: 5px;
   margin-left: 5px;
+}
+
+#attribution {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+}
+#attribution a {
+  color: #3498db; 
+  text-decoration: none;
+  transition: color 0.3s ease-in-out; 
+}
+
+#attribution a:hover {
+  color: #e74c3c; 
 }
