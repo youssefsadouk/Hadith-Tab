@@ -106,8 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const unsplashLink = document.createElement("a");
 
             // Set the URLs for the links
-            photographerLink.href = data.user.links.html;
-            unsplashLink.href = `https://unsplash.com`;
+            photographerLink.href = data.user.links.html+ "?utm_source=HADITH-TAB&utm_medium=referral";
+            console.log(photographerLink.href)
+            unsplashLink.href = `https://unsplash.com?utm_source=HADITH-TAB&utm_medium=referral`;
 
             // Set the link texts
             photographerLink.textContent = photographerName;
