@@ -1,7 +1,7 @@
 {
     "name": "Hadith Tab",
     "version": "1.0.1",
-    "manifest_version" : 2,
+    "manifest_version" : 3,
     "description": "A Chrome Extension that shows Prophet Muhamed's Hadith once a tab is opened",
     "browser_action": {
         "default_popup": "popup.html"
